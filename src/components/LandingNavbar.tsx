@@ -39,14 +39,14 @@ export function LandingNavbar() {
           {/* Logo - Left Side */}
           <Link href="/" className="flex items-center gap-2 group">
             <div className={`h-8 w-8 rounded-lg flex items-center justify-center transition-colors ${
-                isScrolled ? "bg-green-600 text-white" : "bg-white text-green-600"
+                isScrolled ? "bg-white text-green-600" : "bg-white text-green-600"
             }`}>
-              <Recycle className="h-5 w-5" />
+              <img src="/logo-matchgate.png" alt="logo-matchgate" className="h-6 w-6" />
             </div>
             <span className={`font-bold text-xl tracking-tight transition-colors ${
                 isScrolled ? "text-slate-900" : "text-white"
             }`}>
-              MatchGATE
+              <span className="text-[#00A63E]">Match</span><span className="text-orange-400">Gate</span>
             </span>
           </Link>
 
@@ -56,7 +56,7 @@ export function LandingNavbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-green-500 ${
+                className={`text-sm font-medium transition-all duration-200 hover:scale-105 active:scale-95 hover:text-green-500 ${
                     isScrolled ? "text-slate-600" : "text-white/90"
                 }`}
               >
@@ -66,7 +66,7 @@ export function LandingNavbar() {
             <Link href="/login">
                 <Button 
                     size="sm" 
-                    className={`rounded-full px-6 transition-all ${
+                    className={`rounded-full px-6 transition-all hover:scale-105 active:scale-95 duration-200 ${
                         isScrolled 
                             ? "bg-green-600 hover:bg-green-700 text-white" 
                             : "bg-white text-green-900 hover:bg-green-50"

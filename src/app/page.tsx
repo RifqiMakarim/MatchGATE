@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Recycle, Leaf, TrendingUp, Zap, Smartphone, CheckCircle2, ArrowDown } from "lucide-react";
+import { ArrowRight, Recycle, Leaf, TrendingUp, Zap, Smartphone, CheckCircle2, ArrowDown, Play } from "lucide-react";
 import { LandingNavbar } from "@/components/LandingNavbar";
 import { motion } from "framer-motion";
 
@@ -35,7 +35,7 @@ export default function LandingPage() {
       <section className="relative h-screen w-full flex items-center justify-center text-white overflow-hidden">
         {/* Background Image Placeholder */}
         <div className="absolute inset-0 bg-slate-700">
-             <div className="w-full h-full bg-[url('/bg_matchgate.png')] bg-cover bg-center opacity-40 mix-blend-overlay"></div>
+             <div className="w-full h-full bg-[url('/bg-mbg.jpg')] bg-cover bg-center opacity-40 mix-blend-overlay"></div>
              <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/30"></div>
         </div>
 
@@ -49,20 +49,20 @@ export default function LandingPage() {
                 Sistem Matchmaking Sisa Pangan Berkelanjutan
             </motion.div>
             <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight">
-                Ubah Sisa Pangan Menjadi <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-300">Ekonomi Sirkular</span>
+                Ubah Sisa Pangan MBG <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-300">Menjadi Ekonomi Sirkular</span>
             </motion.h1>
             <motion.p variants={fadeInUp} className="max-w-2xl mx-auto text-lg md:text-xl text-slate-200">
-                MatchGATE menghubungkan penyedia sisa pangan, peternak maggot, dan industri energi untuk menciptakan sirkular ekonomi yang berkelanjutan.
+                MatchGATE menghubungkan penyedia sisa pangan hasil <strong>Makanan Bergizi Gratis (MBG)</strong>, peternak maggot, peternak hewan dan industri energi untuk menciptakan ekonomi sirkular yang berkelanjutan.
             </motion.p>
             <motion.div variants={fadeInUp} className="pt-8 flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/login">
-                    <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white rounded-full px-8 h-12 text-base shadow-lg hover:shadow-green-500/25 transition-all">
-                        Mulai Sekarang <ArrowRight className="ml-2 h-4 w-4" />
+                    <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white rounded-full px-8 h-12 text-base shadow-lg hover:shadow-green-500/25 transition-all hover:scale-105 active:scale-95 duration-200">
+                        Mulai Sekarang
                     </Button>
                 </Link>
                 <Link href="#flow">
-                    <Button variant="outline" size="lg" className="rounded-full px-8 h-12 text-base border-white text-white hover:bg-white hover:text-slate-900 bg-transparent">
+                    <Button variant="outline" size="lg" className="rounded-full px-8 h-12 text-base border-white text-white hover:bg-white hover:text-slate-900 bg-transparent transition-all hover:scale-105 active:scale-95 duration-200">
                         Pelajari Alur
                     </Button>
                 </Link>
@@ -120,20 +120,43 @@ export default function LandingPage() {
                       </div>
                   </motion.div>
 
-                  {/* SDGs Image Placeholder */}
-                  <motion.div variants={fadeInUp} className="relative aspect-square w-full max-w-[400px] mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 flex items-center justify-center group">
-                      <div className="absolute inset-0 bg-slate-100 pattern-grid-lg opacity-20"></div>
-                      <div className="relative z-10 w-full h-full p-8 flex items-center justify-center">
-                          <img src="/SDGs12.png" alt="logo-SGDs12" className="max-w-full max-h-full object-contain" />
-                      </div>
-                  </motion.div>
+                  {/* SDGs Grid Placeholders */}
+                  <div className="grid grid-cols-2 gap-4 sm:gap-6">
+                        {[
+                            "/SDGs2.png",
+                            "/SDGs7.png",
+                            "/SDGs12.png",
+                            "/SDGs13.png"
+                        ].map((item) => (
+                        <motion.div 
+                          key={item}
+                          variants={fadeInUp} 
+                          className="bg-white rounded-2xl shadow-md border border-slate-100 flex items-center justify-center p-4 hover:shadow-lg transition-all"
+                        >
+                            <div className="w-full aspect-square relative">
+                                <img src={item} alt="sdg" className="w-full h-full object-contain" />
+                            </div>
+                        </motion.div>
+                      ))}
+                  </div>
               </motion.div>
           </div>
       </section>
 
       {/* 3. CIRCULAR ECONOMY FLOW SECTION */}
       <section id="flow" className="py-20 md:py-32 bg-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+
+          <div className="absolute inset-0 z-0">
+                  <div className="absolute inset-0 bg-[url('/bg-peternakmanggot.jpeg')] bg-cover bg-center opacity-50"></div>
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70"></div>
+          </div>
+          
+          {/* Top Divider (Transition from Goals) */}
+          <div className="absolute top-0 left-0 w-full overflow-hidden leading-none z-10 rotate-180">
+              <svg className="relative block w-[calc(100%+1.3px)] h-[60px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                  <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="fill-slate-50"></path>
+              </svg>
+          </div>
           
           <div className="container mx-auto px-4 relative z-10">
               <motion.div 
@@ -143,25 +166,22 @@ export default function LandingPage() {
                 variants={fadeInUp}
                 className="text-center max-w-3xl mx-auto mb-16"
               >
-                  <h2 className="text-3xl md:text-4xl font-bold mb-4">Ekosistem Sirkular MatchGATE</h2>
-                  <p className="text-slate-600">Integrasi hulu ke hilir: Dari sekolah hingga menjadi energi terbarukan.</p>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Ekosistem Sirkular MatchGate</h2>
+                  <p className="text-white">Integrasi MatchGate dalam menjaga keberlanjutan siklus pangan program makanan bergizi gratis.</p>
               </motion.div>
 
-              {/* FLOW DIAGRAM */}
+              {/* FLOW DIAGRAM 2x2 Grid */}
               <motion.div 
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-50px" }}
                 variants={staggerContainer}
-                className="max-w-5xl mx-auto"
+                className="max-w-4xl mx-auto"
               >
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
                        
-                       {/* Connection Lines (Desktop Only) */}
-                       <div className="hidden md:block absolute top-1/2 left-0 w-full h-[2px] bg-slate-200 -z-10 -translate-y-1/2"></div>
-
                        {/* NODE 1: SOURCE */}
-                       <motion.div variants={fadeInUp} className="bg-white p-6 rounded-2xl shadow-lg border border-slate-100 relative z-10 flex flex-col items-center text-center hover:border-green-500 transition-colors group h-full">
+                       <motion.div variants={fadeInUp} className="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 hover:border-green-500 transition-all hover:shadow-xl group h-full flex flex-col items-center text-center">
                            <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mb-4 group-hover:bg-green-100 transition-colors">
                                <Recycle className="h-8 w-8 text-green-600" />
                            </div>
@@ -169,13 +189,10 @@ export default function LandingPage() {
                            <div className="text-sm font-medium text-slate-500 mb-1">Mitra Sisa Pangan</div>
                            <p className="text-xs text-slate-400">Bersumber dari sekolah dan SPPG yang melayani Makanan Bergizi Gratis</p>
                            <div className="mt-4 px-3 py-1 bg-green-50 text-green-700 text-xs rounded-full">Sisa Makanan</div>
-                           
-                           {/* Mobile Arrow Down */}
-                           <div className="md:hidden mt-4 text-slate-300"><ArrowDown /></div>
                        </motion.div>
 
                        {/* NODE 2: PROCESSOR */}
-                       <motion.div variants={fadeInUp} className="bg-white p-6 rounded-2xl shadow-lg border border-slate-100 relative z-10 flex flex-col items-center text-center hover:border-orange-500 transition-colors group h-full">
+                       <motion.div variants={fadeInUp} className="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 hover:border-orange-500 transition-all hover:shadow-xl group h-full flex flex-col items-center text-center">
                            <div className="w-16 h-16 rounded-full bg-orange-50 flex items-center justify-center mb-4 group-hover:bg-orange-100 transition-colors">
                                <Leaf className="h-8 w-8 text-orange-600" />
                            </div>
@@ -183,13 +200,10 @@ export default function LandingPage() {
                            <div className="text-sm font-medium text-slate-500 mb-1">Peternak Maggot</div>
                            <p className="text-xs text-slate-400">Biokonversi Black Soldier Fly dan dapat melakukan jual beli manggot dari peternak</p>
                            <div className="mt-4 px-3 py-1 bg-orange-50 text-orange-700 text-xs rounded-full">Maggot Fresh</div>
-
-                           {/* Mobile Arrow Down */}
-                           <div className="md:hidden mt-4 text-slate-300"><ArrowDown /></div>
                        </motion.div>
 
                        {/* NODE 3: CONSUMER */}
-                       <motion.div variants={fadeInUp} className="bg-white p-6 rounded-2xl shadow-lg border border-slate-100 relative z-10 flex flex-col items-center text-center hover:border-blue-500 transition-colors group h-full">
+                       <motion.div variants={fadeInUp} className="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 hover:border-blue-500 transition-all hover:shadow-xl group h-full flex flex-col items-center text-center">
                            <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-blue-100 transition-colors">
                                <TrendingUp className="h-8 w-8 text-blue-600" />
                            </div>
@@ -198,32 +212,26 @@ export default function LandingPage() {
                            <p className="text-xs text-slate-400">Manggot sebagai pakan ternak berkualitas dan menjual hasil peternakan kepada mitra lainnya</p>
                            <div className="mt-4 px-3 py-1 bg-blue-50 text-blue-700 text-xs rounded-full">Produk Ternak</div>
                        </motion.div>
-                  </div>
 
-                  {/* WASTE TO ENERGY & LOOPS */}
-                  <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 relative items-center">
-                       {/* Return Arrow Visual (Desktop) */}
-                       <div className="hidden md:block col-span-3 h-px border-t-2 border-dashed border-slate-200 relative">
-                            <span className="absolute left-1/2 -top-3 bg-white px-2 text-xs text-slate-400 -translate-x-1/2"></span>
-                       </div>
-                       
-                       {/* NODE 4: ENERGY */}
-                       <motion.div variants={fadeInUp} className="md:col-start-2 bg-slate-900 text-white p-6 rounded-2xl shadow-xl relative z-10 flex flex-col items-center text-center">
-                           <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-4">
-                               <Zap className="h-8 w-8 text-yellow-400" />
+                       {/* NODE 4: ENERGY (Now Light Theme) */}
+                       <motion.div variants={fadeInUp} className="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 hover:border-yellow-500 transition-all hover:shadow-xl group h-full flex flex-col items-center text-center">
+                           <div className="w-16 h-16 rounded-full bg-yellow-50 flex items-center justify-center mb-4 group-hover:bg-yellow-100 transition-colors">
+                               <Zap className="h-8 w-8 text-yellow-500" />
                            </div>
-                           <h3 className="font-bold text-lg mb-2">4. Waste to Energy</h3>
-                           <p className="text-xs text-slate-400">Mengolah limbah sisa pangan dan hasil mitra peternakan menjadi energi, yang dapat disalurkan kembali ke Mitra Sisa Pangan</p>
+                           <h3 className="font-bold text-lg mb-2 text-slate-900">4. Waste to Energy</h3>
+                           <div className="text-sm font-medium text-slate-500 mb-1">Energi Terbarukan</div>
+                           <p className="text-xs text-slate-400">Mengolah limbah sisa pangan dan hasil mitra peternakan menjadi energi, yang dapat disalurkan kembali</p>
+                           <div className="mt-4 px-3 py-1 bg-yellow-50 text-yellow-700 text-xs rounded-full">Energi Bersih</div>
                        </motion.div>
                   </div>
-
-                  {/* LEGEND / DESCRIPTION OF FLOW */}
-                  <motion.div variants={fadeInUp} className="mt-12 text-center">
-                       <p className="text-sm text-slate-500 max-w-2xl mx-auto italic">
-                           * Alur mencakup pengembalian nilai ekonomi ke Mitra Sisa Pangan, serta konversi limbah ternak menjadi energi.
-                       </p>
-                  </motion.div>
               </motion.div>
+          </div>
+          
+          {/* Aesthetic Divider */}
+          <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
+              <svg className="relative block w-[calc(100%+1.3px)] h-[100px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                  <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="fill-slate-900"></path>
+              </svg>
           </div>
       </section>
 
@@ -240,18 +248,6 @@ export default function LandingPage() {
                    {/* Phone Graphic Placeholder */}
                    <motion.div variants={fadeInUp} className="flex-1 relative flex justify-center">
                        <div className="relative w-[300px] h-[625px] bg-slate-800 rounded-[3rem] border-8 border-slate-700 shadow-2xl overflow-hidden">
-                            {/* Screen Content Placeholder
-                            <div className="absolute inset-0 bg-slate-100 flex flex-col">
-                                <div className="h-16 bg-green-600 w-full"></div>
-                                <div className="p-4 space-y-4">
-                                    <div className="h-32 bg-slate-200 rounded-xl animate-pulse"></div>
-                                    <div className="h-20 bg-slate-200 rounded-xl animate-pulse"></div>
-                                    <div className="h-20 bg-slate-200 rounded-xl animate-pulse"></div>
-                                </div>
-                                <div className="mt-auto p-8 text-center text-slate-400 text-sm font-bold opacity-50">
-                                    
-                                </div>
-                            </div> */}
                             <img src="/BerandaManggot.png" alt="BerandaManggot" />
                        </div>
                        {/* Decorative blobs */}
@@ -283,13 +279,13 @@ export default function LandingPage() {
                            ))}
                        </ul>
 
-                       <div className="pt-4 flex gap-4">
-                           <Button size="lg" className="bg-white text-slate-900 hover:bg-slate-100 rounded-xl h-14 px-6">
-                               <img src="/googlePlay.png" alt="Google Play" className="mr-2 h-5 w-10" /> Download Aplikasi
-                              </Button>
+                       <div className="pt-4 flex gap-6 items-center">
+                           <img src="/download-playstore.png" alt="download-playstore" className="h-20 hover:scale-105 active:scale-95 duration-200 cursor-pointer" />
                               
-                              <Button size="lg" className="bg-green-500 text-white hover:bg-green-600 rounded-xl h-14 px-6">
-                                  <img src="/appStore.png" alt="App Store" className="mr-2 h-5 w-10" /> Demo Aplikasi
+                              <Button size="lg" className="bg-green-500 text-white hover:bg-green-600 rounded-xl h-14 px-6 transition-all hover:scale-105 active:scale-95 duration-200">
+                                  <a href="https://www.figma.com/proto/dcrgDBdLXAPYbg3MhTBFgL/LOMBA-BANDUNG?page-id=0%3A1&node-id=27-278&p=f&viewport=282%2C-390%2C0.34&t=uC72KklrnUKhp570-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1%3A3" target="_blank" className="flex items-center">
+                                  <Play className="mr-2 h-5 w-5 fill-current" /> Demo Aplikasi
+                                  </a>
                             </Button>
                        </div>
                    </motion.div>
@@ -311,7 +307,7 @@ export default function LandingPage() {
                       Mengapa Ini Adalah <span className="text-green-600">Solusi?</span>
                   </motion.h2>
                   <motion.p variants={fadeInUp} className="text-lg text-slate-600">
-                      Inovasi MatchGATE menjawab tantangan global dengan pendekatan lokal yang berdampak nyata.
+                      Inovasi MatchGate menjawab tantangan global dengan pendekatan lokal yang berdampak nyata.
                   </motion.p>
               </motion.div>
 
@@ -345,7 +341,7 @@ export default function LandingPage() {
                     className="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-100 hover:shadow-2xl transition-all hover:-translate-y-2 group"
                   >
                       <div className="h-48 overflow-hidden bg-orange-50 relative">
-                          <img src="/maggot_farming.png" alt="Budidaya Maggot" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                          <img src="/manggot_farming.png" alt="Budidaya Maggot" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
                       </div>
                       <div className="p-8">
@@ -394,11 +390,11 @@ export default function LandingPage() {
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                   <Link href="/login">
-                      <Button size="lg" className="w-full sm:w-auto px-10 h-14 text-lg rounded-full shadow-xl shadow-green-600/20">
+                      <Button size="lg" className="w-full sm:w-auto px-10 h-14 text-lg rounded-full shadow-xl shadow-green-600/20 transition-all hover:scale-105 active:scale-95 duration-200">
                           Masuk Dashboard
                       </Button>
                   </Link>
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto px-10 h-14 text-lg rounded-full">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto px-10 h-14 text-lg rounded-full transition-all hover:scale-105 active:scale-95 duration-200">
                       Hubungi Kami
                   </Button>
               </div>
@@ -408,8 +404,8 @@ export default function LandingPage() {
       {/* FOOTER */}
       <footer className="py-8 bg-white border-t text-center text-slate-500 text-sm">
           <div className="container mx-auto px-4">
-              <p>&copy; {new Date().getFullYear()} MatchGATE System. Hak Cipta Dilindungi.</p>
-              <p className="mt-2">Didukung oleh Dinas Lingkungan Hidup Kota Pekalongan</p>
+              <p>&copy; {new Date().getFullYear()} MatchGate System. Hak Cipta Dilindungi.</p>
+              <p className="mt-2"></p>
           </div>
       </footer>
     </div>
