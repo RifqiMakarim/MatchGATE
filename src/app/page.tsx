@@ -53,7 +53,7 @@ export default function LandingPage() {
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-300">Menjadi Ekonomi Sirkular</span>
             </motion.h1>
             <motion.p variants={fadeInUp} className="max-w-2xl mx-auto text-lg md:text-xl text-slate-200">
-                MatchGATE menghubungkan penyedia sisa pangan hasil <strong>Makanan Bergizi Gratis (MBG)</strong>, peternak maggot, peternak hewan dan industri energi untuk menciptakan ekonomi sirkular yang berkelanjutan.
+                MatchGate menghubungkan penyedia sisa pangan hasil <strong>Makanan Bergizi Gratis (MBG)</strong>, peternak maggot, peternak hewan dan industri energi untuk menciptakan ekonomi sirkular yang berkelanjutan.
             </motion.p>
             <motion.div variants={fadeInUp} className="pt-8 flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/login">
@@ -262,7 +262,7 @@ export default function LandingPage() {
                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">Dalam Genggaman</span>
                        </h2>
                        <p className="text-slate-400 text-lg">
-                           Pantau, jemput, dan kelola transaksi limbah organik Anda secara real-time hanya melalui satu aplikasi mobile MatchGATE.
+                           Pantau, jemput, dan kelola transaksi limbah organik Anda secara real-time hanya melalui satu aplikasi mobile MatchGate.
                        </p>
                        
                        <ul className="space-y-4">
