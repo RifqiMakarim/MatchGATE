@@ -81,7 +81,7 @@ export default function LandingPage() {
 
       {/* 2. GOALS & SDGs SECTION */}
       <section id="manfaat" className="py-20 md:py-32 bg-slate-50">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-8 md:px-24">
               <motion.div 
                 initial="hidden"
                 whileInView="visible"
@@ -131,7 +131,7 @@ export default function LandingPage() {
                         <motion.div 
                           key={item}
                           variants={fadeInUp} 
-                          className="bg-white rounded-2xl shadow-md border border-slate-100 flex items-center justify-center p-4 hover:shadow-lg transition-all"
+                          className="bg-white rounded-2xl shadow-md border border-slate-100 flex items-center justify-center p-8 md:p-10 hover:shadow-lg transition-all"
                         >
                             <div className="w-full aspect-square relative">
                                 <img src={item} alt="sdg" className="w-full h-full object-contain" />
