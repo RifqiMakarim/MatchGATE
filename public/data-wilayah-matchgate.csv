@@ -1,0 +1,101 @@
+Kota,Kategori,Nama Entitas,Lokasi/Alamat
+Jakarta,SPPG,SPPG Pejaten (Polri),Jl. Pejaten Raya Ps. Minggu
+Jakarta,SPPG,SPPG Kemang 1 (GSN),Jl. Kemang Selatan No. 106
+Jakarta,SPPG,SPPG Tanah Abang (TNI),Kawasan Koramil Tanah Abang
+Jakarta,SPPG,SPPG Cilincing,Wilayah Pesisir Cilincing
+Jakarta,SPPG,SPPG Pulogadung,Kawasan Industri Pulogadung
+Jakarta,Sekolah,SMA Negeri 8 Jakarta,Jl. Taman Bukit Duri Tebet
+Jakarta,Sekolah,SMA Kanisius,Jl. Menteng Raya No. 64
+Jakarta,Sekolah,SMA Negeri 70 Jakarta,Jl. Bulungan No. 1
+Jakarta,Sekolah,SMA Negeri 28 Jakarta,Jl. Pasar Minggu Raya
+Jakarta,Sekolah,SMA Negeri 1 Jakarta,Jl. Budi Utomo No. 7
+Jakarta,Peternak Hewan,Kandang Sapi Betawi Muda,Petukangan Utara Pesanggrahan
+Jakarta,Peternak Hewan,Arkandra Farm,Kawasan Agro Wisata Halim
+Jakarta,Peternak Hewan,Bina Satwa Farm,Cipayung Jakarta Timur
+Jakarta,Peternak Hewan,Peternakan Sapi Cibubur,Kawasan Ciracas
+Jakarta,Peternak Hewan,Farm 66 Jakarta,Jagakarsa Jakarta Selatan
+Jakarta,Peternak Maggot,Maggot Sunter (RW 01),Sunter Agung Tanjung Priok
+Jakarta,Peternak Maggot,Biomagg,Wilayah Jakarta (Base Depok)
+Jakarta,Peternak Maggot,Rumah Maggot Pesanggrahan,Binaan LH Pesanggrahan
+Jakarta,Peternak Maggot,Maggot BSF Marunda,Rusun Marunda
+Jakarta,Peternak Maggot,Kebun Kumara,Unit Organik Jakarta Selatan
+Jakarta,Waste to Energy,PSEL Sunter (ITF),Sunter Agung Jakarta Utara
+Jakarta,Waste to Energy,PLTSa Bantargebang,Jl. Pangkalan 5 Bantargebang
+Jakarta,Waste to Energy,RDF Plant Rorotan,Cilincing Jakarta Utara
+Jakarta,Waste to Energy,RDF Plant Bantargebang,Bantargebang Bekasi
+Jakarta,Waste to Energy,Waste4Change Facility,Kawasan Bekasi-Jakarta
+Surabaya,SPPG,SPPG Simorejo,Jl. Simorejo VII No. 27
+Surabaya,SPPG,SPPG Wonocolo,Kawasan Kec. Wonocolo
+Surabaya,SPPG,SPPG Kenjeran,Pesisir Bulak Kenjeran
+Surabaya,SPPG,SPPG Pakal,Kawasan Benowo Surabaya Barat
+Surabaya,SPPG,SPPG Rungkut,Kawasan Industri Rungkut
+Surabaya,Sekolah,SMA Negeri 5 Surabaya,Jl. Kusuma Bangsa No. 21
+Surabaya,Sekolah,SMA Katolik St. Louis 1,Jl. Polisi Istimewa No. 7
+Surabaya,Sekolah,SMA Negeri 2 Surabaya,Jl. Wijaya Kusuma No. 48
+Surabaya,Sekolah,SMA Negeri 15 Surabaya,Jl. Menanggal Selatan No. 103
+Surabaya,Sekolah,SMA Petra 1 Surabaya,Jl. Manyar Kartika No. 1
+Surabaya,Peternak Hewan,Bahari Farm,Jl. Memet Sastrowiryo Kenjeran
+Surabaya,Peternak Hewan,Sobaternak Surabaya,Jl. Ngagel Jaya No. 30
+Surabaya,Peternak Hewan,Peternak Sapi Wonocolo,Kelurahan Sidosermo
+Surabaya,Peternak Hewan,Kambing Etawa Lakarsantri,Kawasan Surabaya Barat
+Surabaya,Peternak Hewan,Farm Surabaya Timur,Kawasan Gunung Anyar
+Surabaya,Peternak Maggot,Maggot BSF Lakarsantri,Jl. Raya Lakarsantri
+Surabaya,Peternak Maggot,Kampung Kedungturi,Kedungturi Kec. Tegalsari
+Surabaya,Peternak Maggot,Rumah Maggot Jambangan,Kampung Edukasi Jambangan
+Surabaya,Peternak Maggot,Maggot BSF Rungkut,Wilayah Rungkut
+Surabaya,Peternak Maggot,BSF Sukomanunggal,Wilayah Sukomanunggal
+Surabaya,Waste to Energy,PSEL Benowo,TPA Benowo Kec. Pakal
+Surabaya,Waste to Energy,PSEL Sumber Rejo,Kawasan Sumber Rejo
+Surabaya,Waste to Energy,Gas Metana TPA Benowo,TPA Benowo
+Surabaya,Waste to Energy,RDF Plant Surabaya,Fasilitas RDF Kota
+Surabaya,Waste to Energy,PSEL Tambak Osowilangun,Kawasan Pelabuhan
+Semarang,SPPG,SPPG Banyumanik,Kawasan Kodam IV/Diponegoro
+Semarang,SPPG,SPPG Ngaliyan,Kawasan Kec. Ngaliyan
+Semarang,SPPG,SPPG Tembalang,Kawasan Tembalang
+Semarang,SPPG,SPPG Mijen,Kawasan Mijen
+Semarang,SPPG,SPPG Gunungpati,Kawasan Gunungpati
+Semarang,Sekolah,SMA Negeri 3 Semarang,Jl. Pemuda No. 149
+Semarang,Sekolah,SMA Negeri 1 Semarang,Jl. Taman Menteri Supeno No. 1
+Semarang,Sekolah,SMA Don Bosko,Jl. Sultan Agung No. 133
+Semarang,Sekolah,SMA Negeri 5 Semarang,Jl. Pemuda No. 143
+Semarang,Sekolah,SMA Sedes Sapientiae,Jl. Mt. Haryono No. 908
+Semarang,Peternak Hewan,Green Fresh Farm,Desa Jatirejo Gunungpati
+Semarang,Peternak Hewan,K.T.T Rejeki Lumintu,Sumurrejo Gunungpati
+Semarang,Peternak Hewan,Barokah Farm Semarang,Ngaliyan Semarang
+Semarang,Peternak Hewan,Peternak Ayam Mijen,Kawasan Mijen
+Semarang,Peternak Hewan,Kambing Bur Semarang,Jabungan Banyumanik
+Semarang,Peternak Maggot,Bank Sampah Purwokeling,RW 10 Purwoyoso
+Semarang,Peternak Maggot,Maggot BSF Jabungan,Jabungan Banyumanik
+Semarang,Peternak Maggot,Maggot BSF Mijen,Wilayah Mijen
+Semarang,Peternak Maggot,Kelompok Tani Parang,Semarang Tengah
+Semarang,Peternak Maggot,Rumah Maggot Gunungpati,Kec. Gunungpati
+Semarang,Waste to Energy,PLTSa Jatibarang,TPA Jatibarang Mijen
+Semarang,Waste to Energy,Gas Metana Jatibarang,Pemanfaatan Gas TPA
+Semarang,Waste to Energy,RDF Plant Jatibarang,TPA Jatibarang
+Semarang,Waste to Energy,Biogas Pasar Johar,Pasar Johar Semarang
+Semarang,Waste to Energy,TPS3R Semarang Barat,Semarang Barat
+Bandung,SPPG,SPPG Cicendo,Lanud Husein Sastranegara
+Bandung,SPPG,SPPG Margahayu Raya,Jl. Merkuri Tengah No. 6
+Bandung,SPPG,SPPG Baleendah,Kawasan Baleendah
+Bandung,SPPG,SPPG Antapani,Kawasan Antapani
+Bandung,SPPG,SPPG Arcamanik,Kawasan Arcamanik
+Bandung,Sekolah,SMA Negeri 3 Bandung,Jl. Belitung No. 8
+Bandung,Sekolah,SMA Alfa Centauri,Jl. Diponegoro No. 48
+Bandung,Sekolah,SMA Negeri 5 Bandung,Jl. Belitung No. 8
+Bandung,Sekolah,SMA Taruna Bakti,Jl. L. L. R.E. Martadinata No. 52
+Bandung,Sekolah,SMA Negeri 2 Bandung,Jl. Cihampelas No. 173
+Bandung,Peternak Hewan,KPSBU Lembang,Jl. Raya Lembang No. 153
+Bandung,Peternak Hewan,Pesona Satwa Farm,Cipatat Kab. Bandung Barat
+Bandung,Peternak Hewan,Farm 144 Bandung,Bandung Utara
+Bandung,Peternak Hewan,Domba Ciwastra,Bandung Timur
+Bandung,Peternak Hewan,Kambing Etawa Bandung,Cimenyan Kab. Bandung
+Bandung,Peternak Maggot,Kang Pisman Maggot,Kel. Mekarjaya Rancasari
+Bandung,Peternak Maggot,ABS Maggot Center,Baleendah Bandung
+Bandung,Peternak Maggot,Maggot BSF Cibiru,Wilayah Cibiru
+Bandung,Peternak Maggot,Rumah Maggot Cisaranten,Cisaranten Kulon
+Bandung,Peternak Maggot,Maggot BSF Antapani,Wilayah Antapani
+Bandung,Waste to Energy,PLTSa Legok Nangka,Nagreg Kab. Bandung
+Bandung,Waste to Energy,RDF Ciwastra,Ciwastra Bandung
+Bandung,Waste to Energy,TPS3R Gedebage,Bandung Timur
+Bandung,Waste to Energy,Biogas KPSBU Lembang,Lembang Bandung
+Bandung,Waste to Energy,PLTSa Sarimukti,Kawasan Sarimukti

@@ -44,10 +44,10 @@ export default function LoginPage() {
       <Card className="w-full max-w-md shadow-xl border-t-4 border-t-primary">
         <CardHeader className="text-center space-y-4">
           <div className="mx-auto bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center">
-             <Recycle className="h-8 w-8 text-primary" />
+             <img src="/logo-matchgate.png" alt="logo matchgate" />
           </div>
           <div>
-            <CardTitle className="text-2xl font-bold">MatchGATE Access</CardTitle>
+            <CardTitle className="text-2xl font-bold">MatchGate Access</CardTitle>
             <CardDescription>Masuk untuk memonitor limbah dan dampak sirkular.</CardDescription>
           </div>
         </CardHeader>
@@ -87,7 +87,7 @@ export default function LoginPage() {
       </Card>
       
       <div className="absolute bottom-4 text-center text-xs text-muted-foreground">
-        &copy; 2026 MatchGATE System. Secure Login.
+        &copy; 2026 MatchGate System. Secure Login.
       </div>
     </div>
   );

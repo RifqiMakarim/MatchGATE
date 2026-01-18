@@ -8,7 +8,17 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Recycle, LogOut, TrendingUp, Scale, Leaf, DollarSign, Map, Package, User, ChevronDown } from "lucide-react";
-import { REGIONAL_DATA, IMPACT_STATS, RECENT_ACTIVITY, GRAPH_DATA, PartnerData } from "@/lib/mock-data";
+// Removed static mock data imports
+// import { IMPACT_STATS, RECENT_ACTIVITY, GRAPH_DATA } from "@/lib/mock-data";
+import {
+  REGIONAL_ENTITIES,
+  CITIES,
+  RegionalEntity,
+  getRegionalDashboardData,
+  RegionalStats,
+  RegionalGraphData,
+  RegionalActivity
+} from "@/lib/regional-data";
 import { MatchmakingPanel } from "@/components/MatchmakingPanel";
 import {
   BarChart,
@@ -23,15 +33,18 @@ import {
   Area,
 } from "recharts";
 
-const LOCATIONS = ["Pekalongan", "Tegal", "Pemalang", "Batang", "Kendal"];
-
 export default function DashboardPage() {
   const router = useRouter();
   const [userRole, setUserRole] = useState("admin");
   const [showMatchmaking, setShowMatchmaking] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState("Pekalongan");
-  const [displayedData, setDisplayedData] = useState<PartnerData[]>([]);
+  const [selectedLocation, setSelectedLocation] = useState("Jakarta");
+  const [displayedData, setDisplayedData] = useState<RegionalEntity[]>([]);
+
+  // New state for dynamic dashboard data
+  const [stats, setStats] = useState<RegionalStats | null>(null);
+  const [graphData, setGraphData] = useState<RegionalGraphData[]>([]);
+  const [activities, setActivities] = useState<RegionalActivity[]>([]);
 
   useEffect(() => {
     setMounted(true);
@@ -42,9 +55,15 @@ export default function DashboardPage() {
   }, []);
 
   useEffect(() => {
-    // Filter data based on selected location
-    const filtered = REGIONAL_DATA.filter((item) => item.location === selectedLocation);
+    // 1. Filter entity data (Table)
+    const filtered = REGIONAL_ENTITIES.filter((item) => item.city === selectedLocation);
     setDisplayedData(filtered);
+
+    // 2. Get regional dashboard stats (Cards, Graph, Activities)
+    const data = getRegionalDashboardData(selectedLocation);
+    setStats(data.stats);
+    setGraphData(data.chartData);
+    setActivities(data.activities);
   }, [selectedLocation]);
 
   if (!mounted) return null;
@@ -58,21 +77,25 @@ export default function DashboardPage() {
       {/* Dashboard Header */}
       <header className="sticky top-0 z-40 w-full border-b bg-white dark:bg-slate-900 px-6 py-3 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-2">
-          <Recycle className="h-6 w-6 text-primary" />
+          <img src="/logo-matchgate.png" alt="Logo MatchGate" className="h-6 w-6 text-primary" />
           <span className="font-bold text-lg hidden sm:inline-block">
-            MatchGATE <span className="text-muted-foreground font-normal">| {isSppg ? "SPPG Dashboard" : "Monitoring"}</span>
+            MatchGate <span className="text-muted-foreground font-normal">| Monitoring</span>
           </span>
         </div>
 
         <div className="flex items-center gap-4">
           <div className="hidden md:flex items-center gap-2 px-3 py-1 bg-white border rounded-full text-sm font-medium shadow-sm">
-            <div className="h-2 w-2 rounded-full bg-green-600 animate-pulse" />
+            <div className={`h-2 w-2 rounded-full animate-pulse ${
+              selectedLocation === "Jakarta" ? "bg-green-600" :
+              selectedLocation === "Surabaya" ? "bg-blue-600" :
+              selectedLocation === "Semarang" ? "bg-orange-600" : "bg-purple-600"
+            }`} />
             <select
               value={selectedLocation}
               onChange={(e) => setSelectedLocation(e.target.value)}
               className="bg-transparent border-none outline-none text-sm font-medium cursor-pointer"
             >
-              {LOCATIONS.map((loc) => (
+              {CITIES.map((loc) => (
                 <option key={loc} value={loc}>
                   Wilayah: {loc}
                 </option>
@@ -101,7 +124,7 @@ export default function DashboardPage() {
           <div>
             <h1 className="text-3xl font-bold tracking-tight">Halo, {userRole.replace(/_/g, " ").toUpperCase()}</h1>
             <p className="text-muted-foreground">
-              Pantau distribusi pangan dan perkembangan sirkular ekonomi.
+              Pantau distribusi pangan dan perkembangan sirkular ekonomi wilayah <span className="font-semibold text-primary">{selectedLocation}</span>.
             </p>
           </div>
           <Button size="lg" className="shadow-lg animate-bounce-slow" onClick={() => setShowMatchmaking(true)}>
@@ -109,70 +132,72 @@ export default function DashboardPage() {
           </Button>
         </div>
 
-        {/* Impact Tracker Grid */}
-        <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Volume Sisa Pangan MBG</CardTitle>
-              <Scale className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                {IMPACT_STATS.wasteManaged.toLocaleString()} <span className="text-sm text-muted-foreground font-normal">Kg</span>
-              </div>
-              <p className="text-xs text-muted-foreground">+20.1% dari bulan lalu</p>
-            </CardContent>
-          </Card>
+        {/* Impact Tracker Grid - DYNAMIC DATA */}
+        {stats && (
+          <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Volume Sisa Pangan MBG</CardTitle>
+                <Scale className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">
+                  {stats.wasteManaged.toLocaleString()} <span className="text-sm text-muted-foreground font-normal">Kg</span>
+                </div>
+                <p className="text-xs text-muted-foreground">+{(Math.random() * 20 + 5).toFixed(1)}% dari bulan lalu</p>
+              </CardContent>
+            </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Produksi Maggot</CardTitle>
-              <Package className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                {IMPACT_STATS.maggotProduction.toLocaleString()} <span className="text-sm text-muted-foreground font-normal">Kg</span>
-              </div>
-              <p className="text-xs text-muted-foreground">Protein tinggi siap panen</p>
-            </CardContent>
-          </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Produksi Maggot</CardTitle>
+                <Package className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">
+                  {stats.maggotProduction.toLocaleString()} <span className="text-sm text-muted-foreground font-normal">Kg</span>
+                </div>
+                <p className="text-xs text-muted-foreground">Protein tinggi siap panen</p>
+              </CardContent>
+            </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Reduksi CO2</CardTitle>
-              <Leaf className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                {IMPACT_STATS.co2Reduced} <span className="text-sm text-muted-foreground font-normal">Ton</span>
-              </div>
-              <p className="text-xs text-muted-foreground">Setara 150 pohon</p>
-            </CardContent>
-          </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Reduksi CO2</CardTitle>
+                <Leaf className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">
+                  {stats.co2Reduced} <span className="text-sm text-muted-foreground font-normal">Ton</span>
+                </div>
+                <p className="text-xs text-muted-foreground">Setara {(parseFloat(stats.co2Reduced) * 8).toFixed(0)} pohon</p>
+              </CardContent>
+            </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Economic Value</CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">Rp {IMPACT_STATS.economicValue.toLocaleString("id-ID")}</div>
-              <p className="text-xs text-muted-foreground">Total transaksi sirkular</p>
-            </CardContent>
-          </Card>
-        </section>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Economic Value</CardTitle>
+                <DollarSign className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">Rp {stats.economicValue.toLocaleString("id-ID")}</div>
+                <p className="text-xs text-muted-foreground">Total transaksi sirkular</p>
+              </CardContent>
+            </Card>
+          </section>
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
-            {/* Chart Section - NEW */}
+            {/* Chart Section - DYNAMIC DATA */}
             <section>
               <div className="mb-4">
-                <h2 className="text-xl font-bold tracking-tight">Tren Limbah & Distribusi</h2>
-                <p className="text-sm text-muted-foreground">Visualisasi data limbah Sekolah vs SPPG minggu ini.</p>
+                <h2 className="text-xl font-bold tracking-tight">Tren dan Distribusi Limbah</h2>
+                <p className="text-sm text-muted-foreground">Visualisasi data limbah Sekolah dan SPPG minggu ini di {selectedLocation}.</p>
               </div>
               <Card className="pl-0 pr-6 pt-6 pb-2 min-h-[350px]">
                 <ResponsiveContainer width="100%" height={300}>
-                  <AreaChart data={GRAPH_DATA} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
+                  <AreaChart data={graphData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
                     <defs>
                       <linearGradient id="colorSekolah" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="5%" stopColor="#22c55e" stopOpacity={0.8} />
@@ -248,10 +273,10 @@ export default function DashboardPage() {
                           <TableRow key={item.id}>
                             <TableCell className="font-medium">{item.name}</TableCell>
                             <TableCell className="text-muted-foreground">
-                                <Badge variant="outline">{item.type}</Badge>
+                                <Badge variant="outline">{item.category}</Badge>
                             </TableCell>
-                            <TableCell>{item.location}</TableCell>
-                            <TableCell className="font-bold">{item.wasteStock} Kg</TableCell>
+                            <TableCell>{item.address}</TableCell>
+                            <TableCell className="font-bold">{item.stock}</TableCell>
                             <TableCell>
                               <Badge
                                 variant={
@@ -293,20 +318,20 @@ export default function DashboardPage() {
             </section>
           </div>
 
-          {/* Matchmaking Activity Widget */}
+          {/* Matchmaking Activity Widget - DYNAMIC DATA */}
           <section className="space-y-4">
             <div>
               <h2 className="text-xl font-bold tracking-tight">Aktivitas Terbaru</h2>
-              <p className="text-sm text-muted-foreground">Daftar Aktivitas yang baru saja dilakukan.</p>
+              <p className="text-sm text-muted-foreground">Daftar aktivitas terkini di {selectedLocation}.</p>
             </div>
 
             <Card>
               <CardHeader className="pb-4">
                 <CardTitle className="text-base">Matchmaking Terkini</CardTitle>
-                <CardDescription>Riwayat sistem.</CardDescription>
+                <CardDescription>Riwayat sistem {selectedLocation}.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                {RECENT_ACTIVITY.map((activity) => (
+                {activities.map((activity) => (
                   <div key={activity.id} className="flex items-start gap-4 pb-4 border-b last:border-0 last:pb-0">
                     <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
                       <TrendingUp className="h-4 w-4 text-primary" />
@@ -321,35 +346,42 @@ export default function DashboardPage() {
                     </div>
                   </div>
                 ))}
-                <Button variant="ghost" className="w-full text-xs" size="sm">
-                  Lihat Semua Riwayat
-                </Button>
+                <div className="pt-2">
+                    <Button variant="ghost" className="w-full text-xs" size="sm">
+                    Lihat Semua Riwayat
+                    </Button>
+                </div>
               </CardContent>
             </Card>
 
-            {/* Mini Stat - Customized for role */}
+            {/* Regional Target Distribution Card - DYNAMIC DATA */}
+            {stats && (
             <Card className="bg-primary/5 border-primary/20">
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm text-primary">Target {isSppg ? "Distribusi" : "Bulan Ini"}</CardTitle>
+                <CardTitle className="text-sm text-primary">Target Distribusi {selectedLocation}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex items-end justify-between">
-                  <span className="text-2xl font-bold text-primary">85%</span>
+                  <span className="text-2xl font-bold text-primary">{stats.distributionTarget.percentage}%</span>
                   <span className="text-xs text-muted-foreground mb-1">
-                    {isSppg ? "850 / 1000 Paket" : "12.5 / 15 Ton"}
+                    {stats.distributionTarget.current} / {stats.distributionTarget.total} {stats.distributionTarget.unit}
                   </span>
                 </div>
                 <div className="h-2 w-full bg-primary/20 rounded-full mt-2">
-                  <div className="h-2 bg-primary rounded-full" style={{ width: "85%" }} />
+                  <div
+                    className="h-2 bg-primary rounded-full transition-all duration-1000 ease-out"
+                    style={{ width: `${stats.distributionTarget.percentage}%` }}
+                  />
                 </div>
               </CardContent>
             </Card>
+            )}
           </section>
         </div>
       </main>
 
       {/* Matchmaking Overlay Panel */}
-      {showMatchmaking && <MatchmakingPanel userRole={userRole} onClose={() => setShowMatchmaking(false)} />}
+      {showMatchmaking && <MatchmakingPanel userRole={userRole} onClose={() => setShowMatchmaking(false)} location={selectedLocation} />}
     </div>
   );
 }

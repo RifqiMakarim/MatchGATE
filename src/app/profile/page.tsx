@@ -8,6 +8,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Mail, Phone, MapPin, Building, BadgeCheck, School, Utensils } from "lucide-react";
 
+import { REGIONAL_ENTITIES, RegionalEntity } from "@/lib/regional-data";
+
 export default function ProfilePage() {
   const [userRole, setUserRole] = useState("admin");
 
@@ -17,45 +19,57 @@ export default function ProfilePage() {
   }, []);
 
   const isSppg = userRole === "sppg" || userRole.includes("sppg");
-  const isSchool = userRole === "school" || userRole === "sekolah";
+  const isSchool = userRole === "school" || userRole === "sekolah" || userRole.includes("sekolah");
 
   // Dynamic Profile Data
   const getProfileData = () => {
+    // Find a real entity from our data to use as the profile
+    let entity: RegionalEntity | undefined;
+
     if (isSppg) {
-      return {
-        name: "SPPG MBG-04",
-        type: "Sentra Pangan & Penanganan Gizi",
-        email: "admin@sppg-mbg04.com",
-        phone: "+62 812-9988-7766",
-        capacityLabel: "Kapasitas Masak",
-        capacityValue: "1000 Porsi/Hari",
-        secondaryLabel: "Target Distribusi",
-        secondaryValue: "10 Sekolah",
-        icon: Utensils
-      };
+      entity = REGIONAL_ENTITIES.find(e => e.role === "sppg");
     } else if (isSchool) {
-      return {
-        name: "SMAN 1 Pekalongan",
-        type: "Sekolah (Peserta MBG)",
-        email: "admin@sman1pgl.sch.id",
-        phone: "+62 285-123456",
-        capacityLabel: "Jumlah Siswa",
-        capacityValue: "1,200 Siswa",
-        secondaryLabel: "Sisa Makanan Harian",
-        secondaryValue: "~45 Kg",
-        icon: School
-      };
+       // Prioritize Jakarta schools as requested
+       entity = REGIONAL_ENTITIES.find(e => e.role === "sekolah" && e.city === "Jakarta") || 
+                REGIONAL_ENTITIES.find(e => e.role === "sekolah");
     } else {
-      return {
-        name: userRole === 'admin' ? 'Admin Dinas LHK' : userRole.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
-        type: "Mitra MatchGATE",
-        email: `admin@${userRole}.matchgate.id`,
-        phone: "+62 812-3456-7890",
-        capacityLabel: "Kapasitas Harian",
-        capacityValue: "200 Kg",
-        icon: Building
-      };
+        // Map other roles
+        const mapRole = userRole === "peternak_manggot" ? "peternak_manggot" : 
+                        userRole === "peternak_hewan" ? "peternak_hewan" : 
+                        userRole === "mitra_energy" ? "waste_to_energy" : undefined;
+        if (mapRole) {
+            entity = REGIONAL_ENTITIES.find(e => e.role === mapRole);
+        }
     }
+
+    // Default Fallback
+    if (!entity) {
+        return {
+            name: "Admin User",
+            type: "Administrator",
+            email: "admin@matchgate.id",
+            phone: "+62 812-3456-7890",
+            location: "Jakarta, Indonesia",
+            capacityLabel: "Role",
+            capacityValue: "Super Admin",
+            icon: Building,
+            avatarSrc: "/logo-matchgate.png"
+        };
+    }
+
+    return {
+      name: entity.name,
+      type: entity.category,
+      email: `admin@${entity.id.split('-')[0]}.matchgate.id`,
+      phone: "+62 812-9988-7766",
+      location: `${entity.address}, ${entity.city}`, 
+      capacityLabel: isSchool ? "Jumlah Siswa" : "Kapasitas Harian",
+      capacityValue: isSchool ? "1,200 Siswa" : `${entity.wasteStock} Kg`,
+      secondaryLabel: "Status Operasional",
+      secondaryValue: entity.status,
+      icon: isSppg ? Utensils : isSchool ? School : Building,
+      avatarSrc: isSppg ? "/sppg-logo.png" : isSchool ? "/tutwuri-logo.png" : "/logo-matchgate.png"
+    };
   };
 
   const profile = getProfileData();
@@ -80,7 +94,7 @@ export default function ProfilePage() {
                  <div className="relative -mt-16 mb-6 flex justify-between items-end">
                      <div className="rounded-full p-2 bg-white dark:bg-slate-900 shadow-xl">
                         <Avatar className="h-32 w-32 border-4 border-white dark:border-slate-900">
-                            <AvatarImage src="/avatar-placeholder.png" alt="User" />
+                            <AvatarImage src={profile.avatarSrc} alt={profile.name} className="object-cover bg-white" />
                             <AvatarFallback className="text-4xl bg-primary text-white">
                                 <Icon className="h-12 w-12" />
                             </AvatarFallback>
@@ -96,7 +110,7 @@ export default function ProfilePage() {
                              <BadgeCheck className="h-6 w-6 text-blue-500" />
                          </h1>
                          <p className="text-muted-foreground flex items-center gap-2 mt-1">
-                             <MapPin className="h-4 w-4" /> Kota Pekalongan, Jawa Tengah
+                             <MapPin className="h-4 w-4" /> {profile.location}
                          </p>
                          <Badge className="mt-2" variant="secondary">{profile.type}</Badge>
                      </div>
@@ -148,8 +162,8 @@ export default function ProfilePage() {
                                   <div className="font-bold text-lg">{profile.capacityValue}</div>
                               </div>
                               <div className="p-3 border rounded-lg">
-                                  <div className="text-xs text-muted-foreground">Jam Operasional</div>
-                                  <div className="font-bold text-lg">07:00 - 15:00</div>
+                                  <div className="text-xs text-muted-foreground">{profile.secondaryLabel || "Jam Operasional"}</div>
+                                  <div className="font-bold text-lg">{profile.secondaryValue || "08:00 - 17:00"}</div>
                               </div>
                           </div>
                      </div>
